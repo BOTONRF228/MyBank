@@ -34,7 +34,6 @@ fullscreen = 1
 android.api = 33
 android.minapi = 21
 android.ndk = 23b
-android.api = 33
 
 # Иконка приложения (должна быть в вашем проекте)
 icon.filename = icon.png
