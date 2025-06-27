@@ -28,15 +28,23 @@ jobs:
           sudo mkswap /swapfile
           sudo swapon /swapfile
 
-      - name: Install Buildozer
+      - name: Install Buildozer and dependencies
         run: |
           pip install buildozer
-          pip install python-for-android
           buildozer init
 
+          sudo apt-get install -y unzip openjdk-17-jdk
+
+          wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip
+          unzip cmdline-tools.zip -d /usr/lib/android-sdk
+          export ANDROID_SDK_ROOT=/usr/lib/android-sdk
+          export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin
+          yes | sdkmanager --licenses
+          sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+          sdkmanager "ndk;25.1.8937393"
       - name: Build APK
         run: |
-          buildozer -v android debug 2>&1 | tee build.log
+         buildozer -v android debug
 
       - name: Show logs
         run: cat build.log
