@@ -22,14 +22,14 @@ jobs:
           python-version: "3.9"  # Рекомендуемая версия для Kivy
 
       # Шаг 3: Устанавливаем системные зависимости (исправленный run!)
-- name: Install system dependencies
-  run: |
-    sudo apt-get update
-    sudo apt-get install -y \
-      git zip unzip openjdk-17-jdk \
-      python3-pip autoconf libtool pkg-config \
-      zlib1g-dev libncurses5-dev libncursesw5-dev \
-      libtinfo5 cmake libffi-dev libssl-dev
+      - name: Install system dependencies
+        run: |
+         sudo apt-get update
+         sudo apt-get install -y \
+         git zip unzip openjdk-17-jdk \
+         python3-pip autoconf libtool pkg-config \
+         zlib1g-dev libncurses5-dev libncursesw5-dev \
+         libStinfo5 cmake libffi-dev libssl-dev
 
       # Шаг 4: Устанавливаем Buildozer
       - name: Install Buildozer
