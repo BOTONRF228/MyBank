@@ -43,4 +43,4 @@ icon.filename = icon.png
 presplash.filename = presplash.png
 
 # Архитектура
-android.arch = arm64-v8a
+android.archs = arm64-v8a
