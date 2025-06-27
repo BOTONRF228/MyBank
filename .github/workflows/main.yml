@@ -45,4 +45,4 @@ jobs:
         if: success()
         with:
           name: app-debug.apk
-          path: bin/*.apk
+          path: bin/
