@@ -32,6 +32,7 @@ jobs:
         run: |
           pip install buildozer
           pip install python-for-android
+          buildozer init
 
       - name: Build APK
         run: |
