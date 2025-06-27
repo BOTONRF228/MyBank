@@ -27,9 +27,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y \
            git zip unzip openjdk-17-jdk \
-            python3-pip autoconf libtool pkg-config \
+           python3-pip autoconf libtool pkg-config \
            zlib1g-dev libncurses5-dev libncursesw5-dev \
-           libtinfo5 cmake libffi-dev libssl-dev  # Исправлено на libtinfo5
+           libtinfo6 cmake libffi-dev libssl-dev  # Изменено на libtinfo6
 
       # Шаг 4: Устанавливаем Buildozer
       - name: Install Buildozer
