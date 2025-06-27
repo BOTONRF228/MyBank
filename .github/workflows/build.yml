@@ -8,39 +8,42 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Используем последний Ubuntu
+    runs-on: ubuntu-latest  # Важно: "ubuntu-latest" (нижний регистр)
 
     steps:
+      # Шаг 1: Клонируем репозиторий
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Шаг 2: Устанавливаем Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.9"  # Рекомендуемая версия для Kivy
 
+      # Шаг 3: Устанавливаем системные зависимости (исправленный run!)
       - name: Install system dependencies
-        run:
-    sudo apt-get update
-    sudo apt-get install -y \
-      git zip unzip openjdk-17-jdk \
-      python3-pip autoconf libtool pkg-config \
-      zlib1g-dev libncurses5-dev libncursesw5-dev \
-      libtinfo5 cmake libffi-dev libssl-dev
+        run: |  # Многострочная команда с |
+          sudo apt-get update
+          sudo apt-get install -y \
+            git zip unzip openjdk-17-jdk \
+            python3-pip autoconf libtool pkg-config \
+            zlib1g-dev libncurses5-dev libncursesw5-dev \
+            libtinfo5 cmake libffi-dev libssl-dev
 
       # Шаг 4: Устанавливаем Buildozer
       - name: Install Buildozer
         run: pip install buildozer
 
-      # Шаг 5: Запускаем сборку APK
+      # Шаг 5: Собираем APK
       - name: Build APK
         run: |
-          buildozer android clean  # Очистка предыдущих сборок
-          buildozer -v android debug  # Сборка APK
+          buildozer android clean
+          buildozer -v android debug
 
-      # Шаг 6: Сохраняем APK как артефакт
+      # Шаг 6: Загружаем APK как артефакт
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: mybank-app-debug.apk
-          path: bin/*.apk  # Путь к собранному APK
+          path: bin/*.apk
